@@ -1,2 +1,0 @@
-# credy
-credy application
