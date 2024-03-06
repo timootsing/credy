@@ -34,19 +34,20 @@ $data = <<<XML
     <json:string>Docker</json:string>
     <json:string>GO</json:string>
   </json:array>
-  <json:number timestamp="timestamp">$unixTimestamp</json:number>
+  <json:number name="timestamp">$unixTimestamp</json:number>
   <json:string name="signature">$signature</json:string>
   <json:string name="vcs_uri">https://github.com/timootsing/credy.git</json:string>
 </json:object>
 XML;
 
 $ch = curl_init($url);
+curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        'Content-Type: text/xml; charset=utf-8',
+        'Content-Type: application/xml',
         'Content-Length: ' . strlen($data))
 );
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 $response = curl_exec($ch);
 
